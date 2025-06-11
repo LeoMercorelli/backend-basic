@@ -1,0 +1,8 @@
+{{!-- Vista simple para probar los productos --}}
+<h1>Lista de Productos</h1>
+<ul>
+    {{#each productos}}
+    <li>ID: {{id}} – {{title}} (${{price}})</li>
+    {{/each}}
+</ul>
+<a href="/realtimeproducts">Ver productos en tiempo real</a>

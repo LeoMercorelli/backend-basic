@@ -1,0 +1,23 @@
+<main class="container product-detail">
+  <h1>{{product.title}}</h1>
+  <p>{{product.description}}</p>
+  <ul>
+    <li><strong>Código:</strong> {{product.code}}</li>
+    <li><strong>Precio:</strong> ${{product.price}}</li>
+    <li><strong>Categoría:</strong> {{product.category}}</li>
+    <li><strong>Stock:</strong> {{product.stock}}</li>
+    <li><strong>Estado:</strong> {{product.status}}</li>
+  </ul>
+  {{#if product.thumbnails}}
+    <div class="images">
+      {{#each product.thumbnails}}
+        <img src="{{this}}" alt="imagen" />
+      {{/each}}
+    </div>
+  {{/if}}
+  <button data-id="{{product._id}}" class="btn btn-primary add-to-cart">Agregar al carrito</button>
+  <a id="viewCart" class="cart-button" href="#">Ver carrito</a>
+  <a href="/products" class="back-link">Volver al listado</a>
+  <script src="/js/cart.js"></script>
+</main>
+

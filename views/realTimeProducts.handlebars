@@ -1,0 +1,14 @@
+{{!-- Vista que se actualiza con Socket.io --}}
+<h1>Productos en Tiempo Real</h1>
+
+<form id="formAgregar">
+    <input name="title" placeholder="Título" required />
+    <input name="price" type="number" placeholder="Precio" required />
+    <button type="submit">Agregar</button>
+</form>
+
+<ul id="listaProductos"></ul>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realtime.js"></script>
+

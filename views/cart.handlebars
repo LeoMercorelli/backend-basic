@@ -1,0 +1,42 @@
+<main class="container">
+  <h1>Carrito</h1>
+  <table id="cartTable">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Subtotal</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each cart.products}}
+      {{#if this.product}}
+      <tr data-id="{{this.product._id}}">
+        <td>{{this.product.title}}</td>
+        <td>${{this.product.price}}</td>
+        <td>
+          <input type="number" class="quantity-input" data-id="{{this.product._id}}" value="{{this.quantity}}" min="1" />
+        </td>
+        <td>${{multiply this.product.price this.quantity}}</td>
+        <td><button class="btn btn-danger btn-sm remove-item" data-id="{{this.product._id}}">Eliminar</button></td>
+      </tr>
+      {{else}}
+      <tr class="error-row">
+        <td colspan="5">Producto no disponible</td>
+      </tr>
+      {{/if}}
+      {{/each}}
+    </tbody>
+  </table>
+  <p id="total">
+    Total: ${{cartTotal cart.products}}
+  </p>
+  <div class="cart-actions">
+    <button id="clearCart" class="btn btn-warning">Vaciar carrito</button>
+    <a href="/products" class="btn btn-link back-button">Volver al listado de productos</a>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="/js/cart.js"></script>
+</main>

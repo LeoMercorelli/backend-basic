@@ -1,0 +1,86 @@
+<main class="container">
+  <h1>Catálogo de productos</h1>
+  <a id="viewCart" class="cart-button" href="#">Ver carrito</a>
+
+  <section id="controls" class="controls">
+    <input type="search" id="searchInput" placeholder="Buscar por nombre" />
+    <input type="text" id="categoryInput" placeholder="Categoría" />
+    <select id="statusSelect">
+      <option value="">Disponibilidad</option>
+      <option value="true">Activo</option>
+      <option value="false">Inactivo</option>
+    </select>
+    <select id="sortSelect">
+      <option value="">Ordenar por precio</option>
+      <option value="asc">Menor precio</option>
+      <option value="desc">Mayor precio</option>
+    </select>
+  </section>
+
+  <ul id="productList" class="product-list">
+    {{#each products}}
+      <li class="product-card">
+        <h3>{{this.title}}</h3>
+        <p>Precio: ${{this.price}}</p>
+        <p>Categoría: {{this.category}}</p>
+        <p>Stock: {{this.stock}}</p>
+        <p>Estado: {{this.status}}</p>
+        <a href="/products/{{this._id}}">Ver detalles</a>
+        <div class="actions d-flex align-items-center gap-1">
+          <input type="number" class="add-qty form-control form-control-sm" value="1" min="1" max="{{this.stock}}" />
+          <button class="btn btn-primary btn-sm add-to-cart" data-id="{{this._id}}">Agregar al carrito</button>
+          <button class="btn btn-secondary btn-sm edit-product" data-id="{{this._id}}">Editar</button>
+          <button class="btn btn-danger btn-sm delete-product" data-id="{{this._id}}">Eliminar</button>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+
+  <nav id="pagination" class="pagination">
+    {{#if pagination.hasPrevPage}}
+      <a href="/products?limit={{pagination.limit}}&page={{pagination.prevPage}}">Anterior</a>
+    {{/if}}
+    <span>Página {{pagination.page}} de {{pagination.totalPages}}</span>
+    {{#if pagination.hasNextPage}}
+      <a href="/products?limit={{pagination.limit}}&page={{pagination.nextPage}}">Siguiente</a>
+    {{/if}}
+  </nav>
+
+  <section id="addProductSection" class="add-product">
+    <h2>Agregar nuevo producto</h2>
+    <form id="addProduct">
+      <input type="text" name="title" placeholder="Título" required />
+      <input type="text" name="description" placeholder="Descripción" required />
+      <input type="text" name="code" placeholder="Código" required />
+      <input type="number" name="price" placeholder="Precio" required />
+      <input type="text" name="category" placeholder="Categoría" />
+      <input type="number" name="stock" placeholder="Stock" />
+      <select name="status">
+        <option value="true">Activo</option>
+        <option value="false">Inactivo</option>
+      </select>
+      <button type="submit">Agregar</button>
+    </form>
+  </section>
+
+  <section id="editProductSection" class="edit-product" style="display:none;">
+    <h2>Editar producto</h2>
+    <form id="editProduct">
+      <input type="text" name="title" placeholder="Título" required />
+      <input type="text" name="description" placeholder="Descripción" required />
+      <input type="text" name="code" placeholder="Código" required />
+      <input type="number" name="price" placeholder="Precio" required />
+      <input type="text" name="category" placeholder="Categoría" />
+      <input type="number" name="stock" placeholder="Stock" />
+      <select name="status">
+        <option value="true">Activo</option>
+        <option value="false">Inactivo</option>
+      </select>
+      <button type="submit">Actualizar</button>
+      <button type="button" id="cancelEdit">Cancelar</button>
+    </form>
+  </section>
+
+  <script src="/js/cart.js"></script>
+  <script src="/js/products.js"></script>
+</main>
